@@ -209,6 +209,15 @@
     line-height: 1;
     color: var(--accent);
   }
+  .bar.is-golden::before {
+    content: "";
+    position: absolute;
+    top: -2px; left: -2px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px var(--bg-surface);
+  }
   .overlap-flag {
     position: absolute;
     top: -3px; bottom: -3px;
@@ -278,7 +287,8 @@
     padding: 13px 16px;
   }
   .card .org-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--card-org, var(--text-muted)); grid-row: 1 / 3; align-self: start; margin-top: 4px; }
-  .card .name { font-weight: 600; font-size: 15px; grid-column: 2; }
+  .card .name { font-weight: 600; font-size: 15px; grid-column: 2; display: inline-flex; align-items: center; gap: 6px; }
+  .golden-ticket { flex: none; display: inline-flex; color: var(--accent); }
   .card .sub {
     grid-column: 2;
     font-size: 13px;
@@ -544,6 +554,7 @@
       <span class="legend-item"><span class="swatch dashed"></span>Projected (from 2026)</span>
       <span class="legend-item">★ My Events</span>
       <span class="legend-item"><span class="swatch" style="background:color-mix(in srgb, var(--status-critical) 22%, transparent); border-color:var(--status-critical)"></span>Conflict (starred events overlap)</span>
+      <span class="legend-item"><span class="golden-ticket"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" stroke="none" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></span> Golden Ticket qualifier</span>
     </div>
   </section>
 
@@ -590,6 +601,7 @@
     <p><b style="color:var(--text-secondary)">Reserved —</b> each card has four icons (flight, rental car, hotel, event ticket) to click once you've booked that piece — they go from a faint outline to solid once marked. Saved the same way as My Events, in this browser's local storage only.</p>
     <p><b style="color:var(--text-secondary)">Conflicts —</b> when two of your ★ starred events overlap in date, each shows a red "Overlaps…" banner naming the other, and the timeline draws a red band across the overlapping days. This only fires between events you've starred — different circuits sharing a weekend happens constantly and isn't flagged.</p>
     <p><b style="color:var(--text-secondary)">Your own events —</b> "+ Add your own event" adds anything this list doesn't cover — a side event, travel, a personal note — into the timeline and list like any other entry, filterable under the "My Custom Events" circuit. Saved only in this browser's local storage; "Remove event" on the card deletes it for good.</p>
+    <p><b style="color:var(--text-secondary)">Golden Ticket —</b> a Golden Ticket is Games Workshop's own qualification invite to the World Championships of Warhammer, earned by placing well at a sanctioned event. Every Frontline Gaming event here is marked GW-eligible on its own ticket page; every GW Warhammer Open stop and AdeptiCon and the ATC are confirmed via GW's own "ways to qualify" articles. Green Banner's own "Gold Ticket" is a VIP merch tier, not a GW qualifier, and is left unmarked; the WTC's Golden Tickets are awarded through a separate regional WTC Qualifier event, not the WTC finals itself. Confirm eligibility on the organizer's page before counting on it.</p>
     <p class="sources">
       <span>Sources:</span>
       <a href="https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" target="_blank" rel="noopener">Warhammer Community ↗</a>
@@ -617,6 +629,7 @@
   const EVENTS = [
     { org:"flg", name:"Las Vegas Open (LVO)", venue:"World Market Center", city:"Las Vegas, NV, USA",
       start:"2026-10-01", end:"2026-10-04", base26s:null, base26e:null, confirmed:true,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://store.frontlinegaming.org/products/warhammer-40k-championships-lvo-2026" },
     { org:"gb", name:"California Cup", venue:"TBA", city:"Pomona, CA, USA",
@@ -625,6 +638,7 @@
       src:"https://greenbannereventco.com/product-category/california-cup/" },
     { org:"gw", name:"Warhammer Open Atlanta / Grand Narrative", venue:"TBA", city:"Atlanta, GA, USA",
       start:"2026-11-20", end:"2026-11-23", base26s:null, base26e:null, confirmed:true,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://web.cvent.com/event/9931e7a8-f847-4ef4-8d2d-c2fbfda72b48/summary" },
     { org:"gw", name:"Warhammer World Championships", venue:"Fira de Barcelona", city:"Barcelona, Spain",
@@ -638,14 +652,17 @@
       src:"https://events.frontlinegaming.org/" },
     { org:"gw", name:"Warhammer Open Palm Springs", venue:"Palm Springs Convention Center", city:"Palm Springs, CA, USA",
       start:"2027-01-15", end:"2027-01-17", base26s:null, base26e:null, confirmed:true,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://cvent.me/bLVRlA" },
     { org:"flg", name:"Cherokee Open", venue:"Harrah's Cherokee Casino Resort", city:"Cherokee, NC, USA",
       start:"2027-02-19", end:"2027-02-21", base26s:"2026-02-20", base26e:"2026-02-22", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://events.frontlinegaming.org/" },
     { org:"gw", name:"Warhammer Open Liverpool", venue:"Exhibition Centre Liverpool, King's Dock", city:"Liverpool, UK",
       start:"2027-02-19", end:"2027-02-21", base26s:null, base26e:null, confirmed:true,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://web.cvent.com/event/bfb59c07-0059-4d1d-8bbf-4d2daae79749/summary" },
     { org:"gb", name:"Colorado Cup", venue:"TBA", city:"Brighton, CO, USA",
@@ -654,15 +671,18 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"ac", name:"AdeptiCon", venue:"Baird Center", city:"Milwaukee, WI, USA",
       start:"2027-04-07", end:"2027-04-11", base26s:"2026-03-25", base26e:"2026-03-29", confirmed:true,
+      goldenTicket:true,
       formats:["40k-gt","40k-team","aos","kill-team","xwing"],
       linkLabel:"Registration info (opens Jan 2027)",
       src:"https://www.adepticon.org/category/registration/" },
     { org:"gw", name:"Warhammer Open Maastricht", venue:"MECC", city:"Maastricht, Netherlands",
       start:"2027-04-22", end:"2027-04-25", base26s:"2026-04-23", base26e:"2026-04-26", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"flg", name:"Rocky Mountain Open", venue:"Denver Marriott Tech Center", city:"Denver, CO, USA",
       start:"2027-05-01", end:"2027-05-02", base26s:"2026-05-02", base26e:"2026-05-03", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","kill-team"],
       src:"https://events.frontlinegaming.org/" },
     { org:"gb", name:"San Diego Classic", venue:"TBA", city:"San Diego, CA, USA",
@@ -671,14 +691,17 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"gw", name:"Warhammer Open Dallas", venue:"Esports Stadium Arlington", city:"Arlington, TX, USA",
       start:"2027-05-21", end:"2027-05-23", base26s:"2026-05-22", base26e:"2026-05-24", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"flg", name:"Bay Area Open", venue:"TBA", city:"Bay Area, CA, USA",
       start:"2027-05-22", end:"2027-05-23", base26s:"2026-05-23", base26e:"2026-05-24", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","kill-team"],
       src:"https://events.frontlinegaming.org/" },
     { org:"gw", name:"Warhammer Open Birmingham", venue:"NEC (w/ UK Games Expo)", city:"Birmingham, UK",
       start:"2027-05-28", end:"2027-05-30", base26s:"2026-05-29", base26e:"2026-05-31", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"gb", name:"Mountain West Classic", venue:"TBA", city:"Provo, UT, USA",
@@ -687,6 +710,7 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"gw", name:"Warhammer Open Edmonton", venue:"Edmonton EXPO Centre", city:"Edmonton, AB, Canada",
       start:"2027-06-18", end:"2027-06-20", base26s:"2026-06-19", base26e:"2026-06-21", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"gb", name:"Heroes Cup", venue:"TBA", city:"Scottsdale, AZ, USA",
@@ -695,10 +719,12 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"atc", name:"American Team Championship (ATC)", venue:"Chattanooga Convention Center", city:"Chattanooga, TN, USA",
       start:"2027-06-25", end:"2027-06-27", base26s:"2026-06-26", base26e:"2026-06-28", confirmed:false,
+      goldenTicket:true,
       formats:["40k-team","kill-team"],
       src:"https://whatc.org/atc-june-2026-tickets" },
     { org:"flg", name:"Atlantic City Open", venue:"Harrah's Resort", city:"Atlantic City, NJ, USA",
       start:"2027-06-11", end:"2027-06-13", base26s:"2026-06-12", base26e:"2026-06-14", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-team","kill-team"],
       src:"https://events.frontlinegaming.org/" },
     { org:"gb", name:"Silver State Classic", venue:"TBA", city:"Reno, NV, USA",
@@ -711,10 +737,12 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"gw", name:"Warhammer Open Tacoma", venue:"Greater Tacoma Convention Center", city:"Tacoma, WA, USA",
       start:"2027-07-16", end:"2027-07-18", base26s:"2026-07-17", base26e:"2026-07-19", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"flg", name:"Lone Star Open", venue:"Marriott Dallas Allen", city:"Allen, TX, USA",
       start:"2027-07-31", end:"2027-08-01", base26s:"2026-08-01", base26e:"2026-08-02", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos"],
       src:"https://events.frontlinegaming.org/" },
     { org:"gb", name:"Utah Cup", venue:"TBA", city:"Farmington, UT, USA",
@@ -727,6 +755,7 @@
       src:"https://wtc-belgium.com/product-categorie/ticketing/" },
     { org:"gw", name:"Warhammer Open Newport", venue:"International Convention Centre Wales", city:"Newport, Wales, UK",
       start:"2027-08-13", end:"2027-08-15", base26s:"2026-08-14", base26e:"2026-08-16", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"gb", name:"Challengers Cup", venue:"TBA (Teams)", city:"Farmington, UT, USA",
@@ -735,6 +764,7 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"flg", name:"Las Vegas Open (LVO)", venue:"World Market Center", city:"Las Vegas, NV, USA",
       start:"2027-09-30", end:"2027-10-03", base26s:"2026-10-01", base26e:"2026-10-04", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://events.frontlinegaming.org/" },
     { org:"gb", name:"California Cup", venue:"TBA", city:"Pomona, CA, USA",
@@ -743,6 +773,7 @@
       src:"https://greenbannereventco.com/events/" },
     { org:"gw", name:"Warhammer Open Atlanta / Grand Narrative", venue:"TBA", city:"Atlanta, GA, USA",
       start:"2027-11-19", end:"2027-11-22", base26s:"2026-11-20", base26e:"2026-11-23", confirmed:false,
+      goldenTicket:true,
       formats:["40k-gt","aos","40k-narrative","kill-team"],
       src:"https://www.warhammer-community.com/en-gb/articles/pjijlowv/revealed-new-warhammer-open-events-for-the-summer-including-the-first-in-the-uk/" },
     { org:"gw", name:"Warhammer World Championships", venue:"Fira de Barcelona", city:"Barcelona, Spain",
@@ -753,6 +784,7 @@
 
   const ORG_LABEL = { gw: "Warhammer Open", gb: "Green Banner", flg: "Frontline Gaming", ac: "AdeptiCon", atc: "American Team Championship", wtc: "World Team Championship", custom: "My Custom Events" };
   const FORMAT_LABEL = { "40k-gt": "40K GT", "40k-narrative": "40K Narrative", "40k-team": "40K Team", "aos": "AOS", "kill-team": "Kill Team", "xwing": "X-Wing (TMG)" };
+  const GOLDEN_TICKET_HTML = '<span class="golden-ticket" title="Golden Ticket event — top finishers qualify for the World Championships of Warhammer"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" stroke="none" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></span>';
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
@@ -1065,7 +1097,7 @@
       segments[idx].forEach(seg => {
         const bar = document.createElement("div");
         const ev = seg.ev;
-        bar.className = "bar " + (ev.confirmed ? "is-confirmed" : "is-projected") + (starred.has(eventId(ev)) ? " is-starred" : "");
+        bar.className = "bar " + (ev.confirmed ? "is-confirmed" : "is-projected") + (starred.has(eventId(ev)) ? " is-starred" : "") + (ev.goldenTicket ? " is-golden" : "");
         bar.tabIndex = 0;
         bar.setAttribute("role", "button");
         bar.setAttribute("aria-label", `${ev.name}, ${fmtRange(ev.start, ev.end)}`);
@@ -1101,7 +1133,7 @@
     return fmtRange(ev.start, ev.end) + (ev.start === ev.end ? "" : `, ${y}`);
   }
   function showTip(e, ev, keyboard) {
-    tip.innerHTML = `<div class="tt-name">${ev.name}</div><div class="tt-meta">${tipDate(ev)} · ${ev.city}</div><div class="tt-meta">${ev.confirmed ? "Confirmed" : "Projected from 2026"}</div>`;
+    tip.innerHTML = `<div class="tt-name">${ev.name}</div><div class="tt-meta">${tipDate(ev)} · ${ev.city}</div><div class="tt-meta">${ev.confirmed ? "Confirmed" : "Projected from 2026"}${ev.goldenTicket ? " · Golden Ticket event" : ""}</div>`;
     tip.classList.add("visible");
     if (keyboard) {
       const r = e.target.getBoundingClientRect();
@@ -1175,7 +1207,7 @@
 
       card.innerHTML = `
         <span class="org-dot"></span>
-        <span class="name">${ev.name}</span>
+        <span class="name">${ev.name}${ev.goldenTicket ? GOLDEN_TICKET_HTML : ""}</span>
         <div class="top-row">
           <button type="button" class="star-btn${isStarred ? " active" : ""}" aria-pressed="${isStarred}" title="${isStarred ? "Remove from My Events" : "Save to My Events"}">${isStarred ? "★" : "☆"}</button>
           <span class="dates">${fmtRange(ev.start, ev.end)}</span>
